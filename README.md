@@ -16,7 +16,7 @@
 
 ![](/screenshots/screenshot-accueil.jpg)
 
-![]()
+![](/screenshots/screenshot-detail.jpg)
 
 ## 🐰 Auteurs
 Luca Montaigut : https://github.com/luca-montaigut

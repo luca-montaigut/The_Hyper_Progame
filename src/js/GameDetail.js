@@ -92,39 +92,37 @@ const GameDetail = (argument) => {
           console.log(response);
           let toInsertYoutube = "";
 
-          if (response.items[0]) {
+          if (response.results[0]) {
             toInsertYoutube += `
+            <div class="col-lg-6 text-center mb-3">
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/${
+              response.results[0].external_id
+            }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <div class="col-lg-6 text-center">
-            <h3>${response.items[0].snippet.title}</h3>
-            <h4>${response.items[0].snippet.channelTitle} - ${convertDate(
-              response.items[0].snippet.publishedAt
-            )}</h>
+            <h3>${response.results[0].name}</h3>
+            <h4>${response.results[0].channel_title} - ${convertDate(
+              response.results[0].created
+            )}</h4>
             </div>
             `;
           }
 
-          document.getElementById("youtube").innerHTML += toInsertYoutube;
-        });
-    };
+          document.getElementById("youtube").innerHTML = toInsertYoutube;
 
-    const fetchYoutubeMini = (url) => {
-      fetch(url)
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
           let toInsertYoutubeMini = "";
-          for (let i = 0; i <= 2; i++) {
-            if (response.items[i]) {
+          for (let i = 1; i <= 3; i++) {
+            if (response.results[i]) {
               toInsertYoutubeMini += `
               <div class="col-lg-4 text-center">
               <div class="video-container">
               <iframe width="560" height="315" src="https://www.youtube.com/embed/${
-                response.items[i].id.videoId
+                response.results[i].external_id
               }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
-              <h3>${response.items[i].snippet.title}</h3>
-              <h4>${response.items[i].snippet.channelTitle} - ${convertDate(
-                response.items[i].snippet.publishedAt
+              <h3>${response.results[i].name}</h3>
+              <h4>${response.results[i].channel_title} - ${convertDate(
+                response.results[i].created
               )}</h4>
               </div>
               `;
@@ -282,25 +280,13 @@ const GameDetail = (argument) => {
                       type="video/mp4">
               Sorry, your browser doesn't support embedded videos.
             </video>`;
-
-            if (clip.video) {
-              let youtubeCode = clip.video;
-              document.getElementById("youtube").innerHTML = `
-              <div class="col-lg-6 text-center mb-3">
-              <iframe width="100%" height="500" src="https://www.youtube.com/embed/${youtubeCode}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-              `;
-              fetchYoutube(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${youtubeCode}&key=AIzaSyD_yEBNYfOB6cG3hJxu6MiG6-tCvZi1d24
-              `);
-              fetchYoutubeMini(
-                `https://www.googleapis.com/youtube/v3/search?key=AIzaSyD_yEBNYfOB6cG3hJxu6MiG6-tCvZi1d24&maxResults=5&part=snippet&type=video&relatedToVideoId=${youtubeCode}`
-              );
-            }
           } else {
             document.querySelector(".trailer").innerHTML = "No data on this";
             document.getElementById("youtube").innerHTML =
               "<p>No data on this<p>";
           }
+
+          fetchYoutube(`https://api.rawg.io/api/games/${slug}/youtube`);
 
           fetchSimilar(`https://api.rawg.io/api/games/${slug}/suggested`);
         });

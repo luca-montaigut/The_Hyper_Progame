@@ -159,8 +159,7 @@ const GameList = (argument = "") => {
     };
 
     let dates = getHomeDefault();
-    console.log(dates);
-    console.log(`https://api.rawg.io/api/games${dates}&page_size=30`);
+
     fetchList(
       `https://api.rawg.io/api/games${dates}&page_size=30`,
       cleanedArgument

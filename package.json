@@ -6,7 +6,6 @@
   "author": "luca-montaigut",
   "license": "ISC",
   "scripts": {
-    "start:dev": "webpack-dev-server --watch",
     "build": "webpack --env.NODE_ENV=development --config webpack.config.js",
     "production": "webpack --env.NODE_ENV=production --config webpack.config.js"
   },

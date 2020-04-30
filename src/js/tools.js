@@ -36,39 +36,85 @@ const addCreators = () => {
         let toInsert = "";
         if (response.developers) {
           response.developers.forEach((developer) => {
-            toInsert += `<a href="#?parent_platforms=playstation">${developer.name}</a>\n`;
+            toInsert += `<a class="studio" data-id="${developer.id}">${developer.name}</a><br>`;
           });
         }
         creator.innerHTML = toInsert;
       });
   });
+  setTimeout(() => {
+    document.querySelectorAll(".studio").forEach((link) => {
+      link.addEventListener("click", seeStudio);
+    });
+  }, 1000);
 };
 
 const platformsIcons = {
-  pc: "<i data-id='1' class='fab fa-windows fa-2x mx-2'></i> ",
-  playstation: "<i data-id='2' class='fab fa-playstation fa-2x mx-2'></i> ",
-  xbox: "<i data-id='3' class='fab fa-xbox fa-2x mx-2'></i> ",
-  ios: "<i data-id='4' class='fas fa-mobile-alt fa-2x mx-2' ></i> ",
-  android: "<i data-id='8' class='fab fa-android fa-2x mx-2'></i> ",
-  mac: "<i data-id='5' class='fab fa-apple fa-2x mx-2'></i>",
-  linux: "<i data-id='6' class='fab fa-linux fa-2x mx-2'></i>",
+  pc:
+    "<img data-id='1' src='src/images/icons/windows.svg' alt='' class='mx-2' style='height :2em;'>",
+  playstation:
+    "<img data-id='2' src='src/images/icons/ps4.svg' alt='' class='mx-2' style='height :2em;'>",
+  xbox:
+    "<img data-id='3' src='src/images/icons/xbox.svg' alt='' class='mx-2' style='height :2em;'>",
+  ios:
+    "<img data-id='4' src='src/images/icons/mobile.svg' alt='' class='mx-2' style='height :2em;'>",
+  android:
+    "<img data-id='8' src='src/images/icons/androi.svg' alt='' class='mx-2' style='height :2em;'>",
+  mac:
+    "<img data-id='5' src='src/images/icons/apple.svg' alt='' class='mx-2' style='height :2em;'>",
+  linux:
+    "<img data-id='6' src='src/images/icons/linux.svg' alt='' class='mx-2' style='height :2em;'>",
   nintendo:
     "<img data-id='7' src='src/images/icons/switch.svg' alt='' class='mx-2' style='height :2em;'>",
-  atari: "<i data-id='9' class='fas fa-ghost fa-2x mx-2'></i>",
-  "commodore-amiga": "<i data-id='10' class='fas fa-joystick fa-2x mx-2'></i>",
-  sega: "<i data-id='11' class='fas fa-gamepad fa-2x mx-2'></i>",
-  "3do": "<i data-id='12' class='fas fa-game-console-handheld fa-2x mx-2'></i>",
+  atari:
+    "<img data-id='9' src='src/images/icons/ghost-solid.svg' alt='' class='mx-2' style='height :2em;'>",
+  "commodore-amiga":
+    "<img data-id='10' src='src/images/icons/ghost-solid.svg' alt='' class='mx-2' style='height :2em;'>",
+  sega:
+    "<img data-id='11' src='src/images/icons/ghost-solid.svg' alt='' class='mx-2' style='height :2em;'>",
+  "3do":
+    "<img data-id='12' src='src/images/icons/ghost-solid.svg' alt='' class='mx-2' style='height :2em;'>",
   "neo-geo":
-    "<i data-id='13' class='fas fa-game-console-handheld fa-2x mx-2'></i>",
+    "<img data-id='13' src='src/images/icons/ghost-solid.svg' alt='' class='mx-2' style='height :2em;'>",
   web:
-    "<i data-id='14' class='fab fa-internet-explorer fa-2x mr-2 '></i><span><i data-id='14' class='fab fa-firefox fa-2x mx-1'></i><span><i data-id='14' class='fab fa-chrome fa-2x ml-2'></i>",
+    "<img data-id='14' src='src/images/icons/ie.svg' alt='' class='mx-2' style='height :2em;'><img data-id='14' src='src/images/icons/firefox.svg' alt='' class='mx-2' style='height :2em;'><img data-id='14' src='src/images/icons/chrome.svg' alt='' class='mx-2' style='height :2em;'>",
+};
+
+const storeIcons = {
+  steam:
+    "<img data-id='1' src='src/images/icons/steam.svg' alt='' class='mx-2' style='height :2em;'>",
+  "playstation-store":
+    "<img data-id='2' src='src/images/icons/ps4.svg' alt='' class='mx-2' style='height :2em;'>",
+  "xbox-store":
+    "<img data-id='3' src='src/images/icons/xbox.svg' alt='' class='mx-2' style='height :2em;'>",
+  "apple-appstore":
+    "<img data-id='4' src='src/images/icons/applestore.svg' alt='' class='mx-2' style='height :2em;'>",
+  gog:
+    "<img data-id='5' src='src/images/icons/gog.svg' alt='' class='mx-2' style='height :2em;'>",
+  nintendo:
+    "<img data-id='6' src='src/images/icons/switch.svg' alt='' class='mx-2' style='height :2em;'>",
+  xbox360:
+    "<img data-id='7' src='src/images/icons/xbox.svg' alt='' class='mx-2' style='height :2em;'>",
+  "google-play":
+    "<img data-id='8' src='src/images/icons/googleplay.svg' alt='' class='mx-2' style='height :2em;'>",
+  itch:
+    "<img data-id='9' src='src/images/icons/itch.svg' alt='' class='mx-2' style='height :2em;'>",
+  "epic-games":
+    "<img data-id='10' src='src/images/icons/epic.svg' alt='' class='mx-2' style='height :2em;'>",
 };
 
 const seePlatform = (e) => {
-  console.log(e.target.dataset.id);
-  platformId = e.target.dataset.id;
-  platform = `?parent_platforms=${platformId}`;
+  let platformId = e.target.dataset.id;
+  let platform = `?parent_platforms=${platformId}`;
   return GameList(platform);
+};
+
+const seeStudio = (e) => {
+  console.log(e);
+  console.log(e.target.dataset.id);
+  let studioId = e.target.dataset.id;
+  let studio = `?developers=${studioId}`;
+  return GameList(studio);
 };
 
 export {
@@ -78,5 +124,7 @@ export {
   convertDate,
   addCreators,
   platformsIcons,
+  storeIcons,
   seePlatform,
+  seeStudio,
 };

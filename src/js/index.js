@@ -21,6 +21,7 @@ const setRoute = () => {
 
   var pageContent = document.getElementById("pageContent");
   routes[path[0]](pageArgument);
+  window.scrollTo(0, 0);
   return true;
 };
 

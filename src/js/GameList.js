@@ -149,7 +149,11 @@ const GameList = (argument = "") => {
           }
           hideShow = 9;
           addCreators();
-          addSeePlatform();
+          document.querySelectorAll(".card-footer p").forEach((footer) => {
+            for (let i = 0; i < footer.children.length; i++) {
+              footer.children[i].addEventListener("click", seePlatform);
+            }
+          });
         });
     };
 
@@ -157,14 +161,6 @@ const GameList = (argument = "") => {
       "https://api.rawg.io/api/games?dates=2020-01-01,2021-12-31&page_size=30&ordering=-added",
       cleanedArgument
     );
-  };
-  const addSeePlatform = () => {
-    document.querySelectorAll(".card-footer p").forEach((footer) => {
-      for (let i = 0; i < footer.children.length; i++) {
-        console.log(footer.children[i]);
-        footer.children[i].addEventListener("click", () => alert("zeub"));
-      }
-    });
   };
 
   const render = () => {

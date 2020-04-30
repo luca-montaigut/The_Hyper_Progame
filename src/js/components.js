@@ -7,7 +7,7 @@ const header = () => {
         <a href="#"><h1>The Hyper Progame</h1></a><br>
       </div>
       <div class="col-lg-4">
-        <div class="d-flex justify-content-between flew-row align-items-center form-div">
+        <div id="searchbar" class="d-flex justify-content-between flew-row align-items-center form-div">
           <i class="fas fa-search mx-3"></i>
           <input type="text" id="findgame" value="" placeholder="Find a game..." class="form-control"><br><br>
         </div>

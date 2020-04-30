@@ -3,17 +3,21 @@ import moment from "moment";
 
 const getHomeDefault = () => {
   let d = new Date();
+  let day = d.getDate();
+  if (day < 10) {
+    day = "0" + String(day);
+  }
   let month = d.getMonth() + 1;
   if (month < 10) {
     month = "0" + String(month);
   }
-  let now = `${d.getFullYear()}-${month}-${d.getDate()}`;
-  let trueDay = d.getDate();
+  let now = `${d.getFullYear()}-${month}-${day}`;
+  let trueDay = day;
   if (trueDay > 28) {
     trueDay = 28;
   }
   let nextYear = `${d.getFullYear() + 1}-${month}-${trueDay}`;
-  return `?dates=${now},${nextYear}`;
+  return `?dates=${now},${nextYear}&ordering=-added`;
 };
 
 const searchGame = () => {

@@ -1,11 +1,26 @@
 import { GameList } from "./GameList";
 import moment from "moment";
 
+const getHomeDefault = () => {
+  let d = new Date();
+  let month = d.getMonth() + 1;
+  if (month < 10) {
+    month = "0" + String(month);
+  }
+  let now = `${d.getFullYear()}-${month}-${d.getDate()}`;
+  let trueDay = d.getDate();
+  if (trueDay > 28) {
+    trueDay = 28;
+  }
+  let nextYear = `${d.getFullYear() + 1}-${month}-${trueDay}`;
+  return `?dates=${now},${nextYear}`;
+};
+
 const searchGame = () => {
   let search = document.getElementById("findgame").value;
   console.log("Search for =", search);
   if (search == "") {
-    search = "?dates=2020-01-01,2021-12-31";
+    search = getHomeDefault();
   } else {
     search = "?search=" + search;
   }
@@ -118,6 +133,7 @@ const seeStudio = (e) => {
 };
 
 export {
+  getHomeDefault,
   searchGame,
   showInfo,
   hideInfo,

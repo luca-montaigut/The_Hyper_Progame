@@ -9981,8 +9981,8 @@ nav .form-control {
 nav .form-control:focus {
   border: none;
   box-shadow: none;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
 }
 nav input:focus::placeholder {
   color: transparent;

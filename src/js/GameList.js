@@ -157,8 +157,20 @@ const GameList = (argument = "") => {
         });
     };
 
+    let d = new Date();
+    let month = d.getMonth() + 1;
+    if (month < 10) {
+      month = "0" + String(month);
+    }
+    let now = `${d.getFullYear()}-${month}-${d.getDate()}`;
+    let trueDay = d.getDate();
+    if (trueDay > 28) {
+      trueDay = 28;
+    }
+    let nextYear = `${d.getFullYear() + 1}-${month}-${trueDay}`;
+
     fetchList(
-      "https://api.rawg.io/api/games?dates=2020-01-01,2021-12-31&page_size=30&ordering=-added",
+      `https://api.rawg.io/api/games?dates=${now},${nextYear}&page_size=30&ordering=-added`,
       cleanedArgument
     );
   };

@@ -139,8 +139,8 @@ nav {
   .form-control:focus {
     border: none;
     box-shadow: none;
-    background-color: $light;
-    color: $dark;
+    background-color: $dark;
+    color: $light;
   }
 
   input:focus::placeholder {

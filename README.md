@@ -8,9 +8,10 @@
 
 `cd The_Hyper_Progame`
 
-`xdg-open index.html`
-
 `npm run build`
+
+Open "index.html"
+
 
 ## Screenshots
 
